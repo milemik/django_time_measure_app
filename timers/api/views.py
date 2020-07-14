@@ -45,3 +45,17 @@ class PauseTimerView(mixins.ListModelMixin,
 
     def post(self, request, *args, **kwargs):
         return self.create(request, *args, **kwargs)
+
+
+class StopPauseTimerView(mixins.RetrieveModelMixin,
+                         mixins.UpdateModelMixin,
+                         generics.GenericAPIView):
+
+    queryset = PauseTimes.objects.all()
+    serializer_class = PauseSerializer
+
+    def get(self, request, pk):
+        return self.retrieve(request, pk)
+
+    def put(self, request, pk):
+        return self.update(request, pk)
